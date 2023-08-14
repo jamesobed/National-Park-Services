@@ -6,3 +6,5 @@ yarn.lock
 *.sqlite
 *.sqlite3
 *.csv
+*.xls
+*.txt

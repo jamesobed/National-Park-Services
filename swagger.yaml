@@ -7,7 +7,7 @@ info:
     email: info@sowfte.com
   version: '1.0'
 servers:
-  - url: https://server.sowfte.com
+  - url: https://national-park-service.onrender.com
     description: This is the production server
     variables: {}
   - url: http://localhost:4303
