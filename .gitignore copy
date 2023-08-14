@@ -1,0 +1,16 @@
+lib-cov
+node_modules/
+jspm_packages/
+# dist
+.env
+.sqlite
+coverage
+data.txt
+database.sqlite
+test.js
+Dockerfile
+# .*
+
+credentials.json
+website-comment-376311-14beff31c8bb.json
+/cr

@@ -1,0 +1,178 @@
+openapi: 3.0.0
+info:
+  title: Park Services
+  description: At sowfte, our goal is to prepare people for the challenges and opportunities of the rapidly evolving software industry by equipping them with the latest tools, technologies, and best practices.
+  contact:
+    name: info@sowfte.com
+    email: info@sowfte.com
+  version: '1.0'
+servers:
+  - url: https://server.sowfte.com
+    description: This is the production server
+    variables: {}
+  - url: http://localhost:4303
+    description: 'This is the localhost development server'
+    variables: {}
+paths:
+  /user/signup-signin:
+    post:
+      tags:
+        - Auth
+      summary: Signup/Signin
+      description: This is the signup endpoint, which allows you to register a user
+      operationId: RegisterUser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/registeruserrequest'
+                - example:
+                    email: test@test.com
+                    password: '1234'
+                    confirmPassword: '1234'
+            example:
+              email: test@test.com
+              password: '1234'
+              confirmPassword: '1234'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content: {}
+      deprecated: false
+      security: []
+
+  /user/save-park:
+    post:
+      tags:
+        - Auth
+      summary: Save Park
+      description: This is the save park endpoint, which allows you to save a park
+      operationId: savePark
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/saveparkrequest'
+                - example:
+                    parkId: 123ab
+                    parkName: 'State Park'
+                    parkLocation: '1234 Park Lane'
+            example:
+              parkId: 123ab
+              parkName: 'State Park'
+              parkLocation: '1234 Park Lane'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content: {}
+      deprecated: false
+      security:
+        - bearer: []
+
+  /user/all-saved-parks:
+    get:
+      tags:
+        - Auth
+      summary: Get All user saved parks
+      description: This is the get parks endpoint, which allows you to get all saved parks
+      operationId: getParks
+      parameters: []
+      requestBody:
+        description: ''
+        content: {}
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content: {}
+      deprecated: false
+      security:
+        - bearer: []
+
+  /user/remove-park/{id}:
+    delete:
+      tags:
+        - Auth
+      summary: Remove Park
+      description: This is the remove park endpoint, which allows you to remove a saved park
+      operationId: removePark
+      parameters:
+        - name: id
+          in: path
+          description: id of park to remove
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: ''
+        content: {}
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content: {}
+      deprecated: false
+      security:
+        - bearer: []
+
+components:
+  schemas:
+    registeruserrequest:
+      title: registeruserrequest
+      required:
+        - email
+        - password
+        - confirmPassword
+
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+        confirmPassword:
+          type: string
+      example:
+        email: test@test.com
+        password: '1234'
+        confirmPassword: '1234'
+    saveparkrequest:
+      title: registeruserrequest
+      required:
+        - parkId
+        - parkName
+        - parkLocation
+
+      type: object
+      properties:
+        parkId:
+          type: string
+        parkName:
+          type: string
+        parkLocation:
+          type: string
+      example:
+        parkId: 123ab
+        parkName: 'State Park'
+        parkLocation: '1234 Park Lane'
+
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+security: []
+tags:
+  - name: Auth
+    description: 'User interaction create token'
+  - name: User
+    description: 'Token needed in this section'

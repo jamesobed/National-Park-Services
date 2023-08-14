@@ -1,0 +1,130 @@
+openapi: 3.0.0
+info:
+  title: ByteSphere
+  description: At ByteSphere, our goal is to prepare people for the challenges and opportunities of the rapidly evolving software industry by equipping them with the latest tools, technologies, and best practices.
+  contact:
+    name: hr.admin@bytesphere.com
+    email: info@bytesphere.com
+  version: '1.0'
+servers:
+  - url: https://server.bytesphere.com
+    description: This is the production server
+    variables: {}
+  - url: http://localhost:4003
+    description: 'This is the localhost development server'
+    variables: {}
+paths:
+  /user/register:
+    post:
+      tags:
+        - Auth
+      summary: Signup/Signin
+      description: This is the signup endpoint, which allows you to register a user
+      operationId: RegisterUser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/registeruserrequest'
+                - example:
+                    firstName: Woos
+                    lastName: Wobi
+                    phoneNumber: '07000000000'
+                    email: test@test.com
+                    password: '1234'
+                    confirmPassword: '1234'
+                    learningMode: 'live'
+                    gender: 'male'
+                    state: 'Abuja'
+                    street: 'Gwagwalada road'
+                    contactAddress: '2 Chief Chiwnedo Street'
+            example:
+              firstName: Woos
+              lastName: Wobi
+              phoneNumber: '07000000000'
+              email: test@test.com
+              password: '1234'
+              confirmPassword: '1234'
+              learningMode: 'live'
+              gender: 'male'
+              state: 'Abuja'
+              street: 'Gwagwalada road'
+              contactAddress: '2 Chief Chiwnedo Street'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content: {}
+      deprecated: false
+      security: []
+
+components:
+  schemas:
+
+    registeruserrequest:
+      title: registeruserrequest
+      required:
+        - firstName
+        - lastName
+        - street
+        - contactAddress
+        - phoneNumber
+        - state
+        - email
+        - password
+        - confirmPassword
+        - gender
+        - learningMode
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        contactAddress:
+          type: string
+        street:
+          type: string
+        phoneNumber:
+          type: string
+        email:
+          type: string
+        learningMode:
+          type: string
+        phoneNumber:
+          type: string
+        password:
+          type: string
+        confirmPassword:
+          type: string
+        gender:
+          type: string
+      example:
+        firstName: Woos
+        lastName: Wobi
+        phoneNumber: '07000000000'
+        email: test@test.com
+        password: '1234'
+        confirmPassword: '1234'
+        learningMode: 'live'
+        gender: 'male'
+        state: 'Abuja'
+        street: 'Gwagwalada road'
+        contactAddress: '2 Chief Chiwnedo Street'
+
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+security: []
+tags:
+  - name: Auth
+    description: 'User interaction create token'
+  - name: User
+    description: 'Token needed in this section'
+  - name: Admin
+    description: ''

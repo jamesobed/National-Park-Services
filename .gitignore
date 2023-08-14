@@ -1,0 +1,8 @@
+node_modules
+.env
+yarn.lock
+*.rest
+*.log
+*.sqlite
+*.sqlite3
+*.csv
